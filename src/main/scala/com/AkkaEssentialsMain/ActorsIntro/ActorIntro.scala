@@ -1,4 +1,4 @@
-package com.AkkaEssentialsMain
+package com.AkkaEssentialsMain.ActorsIntro
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
@@ -35,8 +35,8 @@ object ActorIntro extends App {
   //the return value of this whole expression is an actor reference {{actorRef}}
   //actorRef ==> Returns the path for instantiated actor (from this actor up to the root actor).
   val actorInstanceSignaler: ActorRef =
-          actorsystem.actorOf(Props[ActorClass](), "actorsInstance")
- //====> Step Five: communicate between actor send signal and receive the result
+  actorsystem.actorOf(Props[ActorClass](), "actorsInstance")
+  //====> Step Five: communicate between actor send signal and receive the result
   actorInstanceSignaler ! "My Name Is Mahmoud And I'm Explaining Akka"
   //what happen here that actorInstance Signaler send a message with the type String
   // to the receiver  {{ receive method}} will match the type and send the result
