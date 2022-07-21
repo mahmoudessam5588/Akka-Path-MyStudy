@@ -31,7 +31,7 @@ object ActorCapabilitiesAndBehaviours extends App {
       case OrderedToIntroduceMySelf(msg) => self ! msg
       case TargetActorRef(ref) => ref ! "Gift From Actor"
       case OrderedToSendGiftToTargetActorRef(content, ref) =>
-        ref ! (content + "s") //equivalent to  (ref ! (content + "s")(self)
+        ref !  (content + "s") //equivalent to  (ref ! (content + "s")(self)
       case _ =>
     }
   }
