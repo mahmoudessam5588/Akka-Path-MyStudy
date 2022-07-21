@@ -20,17 +20,22 @@ object ActorCapabilitiesAndBehaviours extends App {
       //normal matching
       case "Greeting" =>
         println("Matched the String Object greeting My Position Is Curial Because If I Was To Be  Placed below strMatcher I will Never Be Called And Displayed Take Care of My Placement")
-      case strMatcher: String => println(s"I Display Result Of  Any String Or Case Classes Have STRING MEMBERS= $strMatcher")
+      case strMatcher: String =>
+        println(s"I Display Result Of  Any String Or Case Classes Have STRING MEMBERS= $strMatcher")
+      //the code below enters infinite loop but was only showcasing that you can replay by message to Actors
+      //context.sender() ! "replay Back By Saying I'M Grateful For The Gift I Received From You"
       case intMatcher: Int => println(s"Age = $intMatcher")
         // behaviour change according to logic passed
         import MatchingPatterns.*
       case SignalMessageReceiver(msg) => println(s"Receive Signal From Actor Directing My $msg")
       case OrderedToIntroduceMySelf(msg) => self ! msg
       case TargetActorRef(ref) => ref ! "Gift From Actor"
-      case OrderedToSendGiftToTargetActorRef(content, ref) => ref ! (content + "s")
+      case OrderedToSendGiftToTargetActorRef(content, ref) =>
+        ref ! (content + "s") //equivalent to  (ref ! (content + "s")(self)
       case _ =>
     }
   }
+
   val actorSystem = ActorSystem("TestingBehaviour")
   val actorInstance = actorSystem.actorOf(Props[MatchingPatterns](), "Actors")
   //testing matching pattern Matching
@@ -40,6 +45,7 @@ object ActorCapabilitiesAndBehaviours extends App {
 
 
   import MatchingPatterns.*
+
   actorInstance ! SignalMessageReceiver("Message I Received Back To Him")
   actorInstance ! OrderedToIntroduceMySelf("Hi This Message Has Been Signal From Actor to Introduce MySelf By Receive Method")
   //actors reply to massages and send messages o one another
@@ -64,4 +70,7 @@ I Display Result Of  Any String Or Case Classes Have STRING MEMBERS= Hi This Mes
 to Introduce Myself By Receive Method
   -------------------------------------------------------------------------------
 I Display Result Of  Any String Or Case Classes Have STRING MEMBERS= ss */
+  //Important note to ! (tell Method) There is the message signature
+  //def !(message: Any)(implicit sender: ActorRef = Actor.noSender): Unit
+  //every message take Any and have implicit value of actor ref and return a Unit
 }
