@@ -69,7 +69,7 @@ object MoreComplexImmutableStateChangeExample extends App {
         val newCandidateStatus: Map[String, Int] =
         currentStatus + (candidate -> (currentAppliedCandidates + 1))
         //condition logic must be applied below to exclude candidates haven't applied yet
-        //and print result to the console
+        //and print result to the console of type of the exam to applied candidates
         if newWaitingToApply.isEmpty then println(s"[Applications]Status :$newCandidateStatus")
         else context.become(applicationsStatus(newWaitingToApply, newCandidateStatus))
     }
