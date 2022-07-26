@@ -51,8 +51,6 @@ B)CallingThreadDispatcher ==>
     val dispatcherCounter = actorSystem.actorOf(Props[Counter]().withDispatcher(CallingThreadDispatcher.Id))
 */
 
-
-
 object SynchronousTestingSpec {
   case object Inc
   case object Read
