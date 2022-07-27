@@ -37,6 +37,7 @@ object StartingStoppingActors extends App {
       case message => log.info(message.toString)
     }
   }
+  //--------------------------------------------------------------------
   /*####Method 1 ===> Using Context.stop()*/
   import Boss.*
   val bossActor = actorSystem.actorOf(Props[Boss]())
