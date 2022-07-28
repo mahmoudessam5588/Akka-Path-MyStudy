@@ -87,7 +87,7 @@ object AkkaDispatchers extends App {
   //Also best practice to use dedicated custom dispatcher other than the main akka dispatcher as shown above
   //###Solution 2
   //in application.conf
-  //type =Dispatcher there are other type od Dispatcher like
+  //type =Dispatcher there are other type of Dispatcher like
   // PinnedDispatcher --->which binned each actor to a thread pool of exactly one thread and thread circle around
   //CallingThreadDispatcher -->Check akka testing ensure that all communication with an actor happen on the calling thread
   //whatever that thread is
