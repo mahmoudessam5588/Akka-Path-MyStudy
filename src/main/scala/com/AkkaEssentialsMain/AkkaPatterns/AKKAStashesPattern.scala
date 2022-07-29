@@ -37,20 +37,14 @@ object AKKAStashesPattern extends App {
   //read and write are handled
 
   case object Open
-
   case object Close
-
   case object Read
-
   case class Write(data: String)
-
   //Step One Mixin Stash Trait
   class ResourceActor extends Actor with ActorLogging with Stash {
     //simulate writing to database
     private var innerData: String = ""
-
     override def receive: Receive = closed
-
     def closed: Receive = {
       case Open =>
         log.info("Opening Resource")
@@ -62,7 +56,6 @@ object AKKAStashesPattern extends App {
         //Step 2 Stash Message U can't Handled
         stash()
     }
-
     def opened: Receive = {
       case Read =>
         //do some actual computation
@@ -79,7 +72,6 @@ object AKKAStashesPattern extends App {
         stash()
     }
   }
-
   val actorSystem = ActorSystem("StashDemo")
   val resourceActor = actorSystem.actorOf(Props[ResourceActor](), "ResourceActor")
   /*resourceActor ! Write("I Love Akka")
